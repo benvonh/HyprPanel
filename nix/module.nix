@@ -643,7 +643,18 @@ in
     #     Install = { WantedBy = [ "graphical-session.target" ]; };
     #   };
     # };
-    warnings = if cfg.systemd.enable then [ "The `systemd.enable` option is now obsolete." ] else [];
+    # warnings = if cfg.systemd.enable then [ ''
+    #   ************************
+    #   *    HyprPanel     *
+    #   *------------------*
+    #   * The 'systemd.enable' option is obsolete. 
+    # ********************************************************************************
+    # *                                  HyprPanel                                   *
+    # *------------------------------------------------------------------------------*
+    # *                         You didn't add the overlay!                          *
+    # *                                                                              *
+    # ********************************************************************************
+    # '' ] else [];
 
     wayland.windowManager.hyprland.settings.exec-once = mkIf cfg.hyprland.enable [ "${package}/bin/hyprpanel" ];
   };
